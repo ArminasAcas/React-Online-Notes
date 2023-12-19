@@ -1,0 +1,45 @@
+.web-information {
+    text-align: center;
+    margin: 50px 75px 50px 75px;
+    padding: 0 25px 25px 25px;
+    text-wrap: wrap;
+    word-break: break-word;
+    border: 1px solid rgb(159, 157, 175);
+    border-radius: 25px;
+    box-shadow: 1px 1px 15px #96a2b3;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(223, 239, 255);;
+}
+
+.web-information--header {
+    font-size: 45px; 
+}
+
+.web-information--text {
+    font-size: large;
+}
+
+.web-information--images {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 30px 0 30px 0;
+}
+
+.web-information--image {
+    max-width: 384px;
+    max-height: 384px;
+    border-radius: 50px;
+}
+
+@media (max-width: 768px) {
+    .web-information {
+      margin: 50px 10px 50px 10px;
+      padding: 0 10px 10px 10px;
+    }
+
+    .web-information--image {
+        max-width: 80%;
+    }
+  }

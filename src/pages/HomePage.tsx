@@ -1,14 +1,19 @@
 import Navbar from "../components/NavbarComponent"
-import WebsiteInformation from "../components/WebsiteInformation"
+import WebsiteInformation from "../components/WebsiteInformationComponent"
 import Footer from "../components/FooterComponent"
+import { websiteInformationData } from "../global/textData";
 
 export default function Home() {
 
     return(
         <>
             <Navbar/>
-            <WebsiteInformation/>
-            <Footer/>
+            <WebsiteInformation 
+            headerText={websiteInformationData.headerText} 
+            paragraphTextArray={websiteInformationData.paragraphs} 
+            imgURLS={websiteInformationData.imageURLS}
+            />
+            <Footer footerText="© 2023 Online Notes"/>
         </>
     )
 }
