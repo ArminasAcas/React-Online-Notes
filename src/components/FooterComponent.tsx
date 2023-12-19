@@ -1,9 +1,6 @@
 import "../css/FooterComponent.css"
 
-export default function Footer(props: {footerText : string}) {
-    if (!props.footerText) return;
-    
-    return ( 
-        <span  className="footer">{props.footerText}</span>
-    )
+export default function Footer(props: {footerText ?: string}) {
+    if (props.footerText) return ( <span  className="footer">{props.footerText}</span> )
+    else return ( <span  className="footer">© 2023 Online Notes</span> )
 }

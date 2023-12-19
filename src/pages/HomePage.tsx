@@ -13,7 +13,7 @@ export default function Home() {
             paragraphTextArray={websiteInformationData.paragraphs} 
             imgURLS={websiteInformationData.imageURLS}
             />
-            <Footer footerText="© 2023 Online Notes"/>
+            <Footer/>
         </>
     )
 }
