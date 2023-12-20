@@ -19,35 +19,3 @@
 .register__header {
     text-align: center;
 }
-
-.register__label {
-    font-size: large;
-    margin-top: 20px;
-    padding-left: 15px;
-}
-
-.register__text-input {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: medium;
-    border-radius: 25px;
-}
-
-.register__button {
-    margin-top: 25px;
-    width: 40%;
-    padding: 15px 25px 15px 25px;
-    font-size: large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-radius: 25px;
-    align-self: center;
-    background-color: rgb(232, 234, 241);
-}
-
-.register__button:hover {
-    background-color: rgb(249, 250, 255);
-}
-
-.register__button:active {
-    background-color: rgb(201, 203, 210);
-}
