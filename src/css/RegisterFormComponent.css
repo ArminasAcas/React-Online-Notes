@@ -1,10 +1,10 @@
-.login {
+.register {
     display: flex;
     flex-direction: column;
     justify-content: center; 
 }
 
-.login__form {
+.register__form {
     padding: 25px 50px 25px 50px;
     margin: 50px auto; 
     width: 600px; 
@@ -16,24 +16,24 @@
     flex-direction: column; 
 }
 
-.login__header {
+.register__header {
     text-align: center;
 }
 
-.login__label {
+.register__label {
     font-size: large;
     margin-top: 20px;
     padding-left: 15px;
 }
 
-.login__text-input {
+.register__text-input {
     margin-top: 10px;
     padding: 10px;
     font-size: medium;
     border-radius: 25px;
 }
 
-.login__button {
+.register__button {
     margin-top: 25px;
     width: 40%;
     padding: 15px 25px 15px 25px;
@@ -44,10 +44,10 @@
     background-color: rgb(232, 234, 241);
 }
 
-.login__button:hover {
+.register__button:hover {
     background-color: rgb(249, 250, 255);
 }
 
-.login__button:active {
+.register__button:active {
     background-color: rgb(201, 203, 210);
 }
