@@ -4,15 +4,15 @@
     word-break: break-word;
 }
 
-.web-information--header {
+.web-information__header {
     font-size: 45px; 
 }
 
-.web-information--text {
+.web-information__text {
     font-size: large;
 }
 
-.web-information--images {
+.web-information__images {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -20,7 +20,7 @@
     margin: 30px 0 30px 0;
 }
 
-.web-information--image {
+.web-information__image {
     max-width: 384px;
     max-height: 384px;
     border-radius: 50px;
@@ -32,7 +32,7 @@
       padding: 0 10px 10px 10px;
     }
 
-    .web-information--image {
+    .web-information__image {
         max-width: 80%;
     }
   }

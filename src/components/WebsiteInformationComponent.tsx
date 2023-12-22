@@ -5,16 +5,19 @@ export default function WebsiteInformation(props: { headerText : string, paragra
 
     if (!props.headerText || !props.paragraphTextArray || !Array.isArray(props.paragraphTextArray)) return null;
 
-    const paragraphs = props.paragraphTextArray.map((paragraph, index) => <p key={index} className="web-information--text">{paragraph}</p>);
+    const paragraphs = props.paragraphTextArray.map(
+        (paragraph, index) => <p key={index} className="web-information__text">{paragraph}</p>
+    );
+
     let images;
-    if (props.imgURLS) images = props.imgURLS.map((image, index) => <img src={image} key={index} className="web-information--image"></img>)
+    if (props.imgURLS) images = props.imgURLS.map((image, index) => <img src={image} key={index} className="web-information__image"></img>)
 
     return (
         <Container>
             <div className="web-information">
-                <h1 className="web-information--header">{props.headerText}</h1>
+                <h1 className="web-information__header">{props.headerText}</h1>
                 {paragraphs}
-                {images ? <div className="web-information--images"> {images} </div> : null}
+                {images ? <div className="web-information__images"> {images} </div> : null}
             </div>
         </Container>
         
