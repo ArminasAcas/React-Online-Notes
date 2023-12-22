@@ -1,13 +1,7 @@
 .web-information {
     text-align: center;
-    margin: 50px 75px 50px 75px;
-    padding: 0 25px 25px 25px;
     text-wrap: wrap;
     word-break: break-word;
-    border: 1px solid rgb(159, 157, 175);
-    border-radius: 25px;
-    box-shadow: 1px 1px 15px #96a2b3;
-    background-color: rgb(223, 239, 255);
 }
 
 .web-information--header {

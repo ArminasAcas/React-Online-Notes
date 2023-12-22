@@ -1,4 +1,5 @@
 import "../css/WebsiteInformationComponent.css"
+import Container from "./ContainerComponent";
 
 export default function WebsiteInformation(props: { headerText : string, paragraphTextArray: string[], imgURLS ?: string[]}) {
 
@@ -9,10 +10,13 @@ export default function WebsiteInformation(props: { headerText : string, paragra
     if (props.imgURLS) images = props.imgURLS.map((image, index) => <img src={image} key={index} className="web-information--image"></img>)
 
     return (
-        <div className="web-information">
-            <h1 className="web-information--header">{props.headerText}</h1>
-            {paragraphs}
-            {images ? <div className="web-information--images"> {images} </div> : null}
-        </div>
+        <Container>
+            <div className="web-information">
+                <h1 className="web-information--header">{props.headerText}</h1>
+                {paragraphs}
+                {images ? <div className="web-information--images"> {images} </div> : null}
+            </div>
+        </Container>
+        
     )
 }
