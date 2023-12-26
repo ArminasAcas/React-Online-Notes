@@ -1,0 +1,19 @@
+.warning {
+    padding: 25px 50px 25px 50px;
+    border: 2px solid rgb(255, 222, 7);
+    background-color: rgb(255, 255, 152);
+    text-align: center;
+    margin-top: 25px;
+    border-radius: 25px;
+    word-wrap: break-word;
+}
+
+.warning__header {
+    color: rgb(46, 46, 46);
+    margin: 0;
+}
+
+.warning__text {
+    color: rgb(72, 72, 72);
+    margin: 25px 0 0 0;
+}
