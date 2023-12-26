@@ -9,3 +9,7 @@ export const websiteInformationData = {
         "images/Temp-notes2.jpg",
     ],
 };
+
+export const warningMessages = {
+    PasswordsNotEqual: "The passwords you entered do not match. Please try again."
+};
