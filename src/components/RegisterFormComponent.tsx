@@ -37,29 +37,58 @@ export default function RegisterForm() {
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setWarning("");
-        
+
+        if (username.length < 6){
+            setWarning(warningTypes.ShortUsername);
+            return;
+        }
+
+        if (password.length < 8){
+            setWarning(warningTypes.ShortPassword);
+            return;
+        }
+
+        if (!/\d/.test(password)){
+            setWarning(warningTypes.PasswordMissingDigit);
+            return
+        }
+
+        if (!/[a-z]/.test(password)){
+            setWarning(warningTypes.PasswordMissingLowerCaseCharacter);
+            return;
+        }
+
+        if (!/[A-Z]/.test(password)){
+            setWarning(warningTypes.PasswordMissingUpperCaseCharacter);
+            return;
+        }
+
         if (password !== repeatPassword){
             setWarning(warningTypes.PasswordsNotEqual);
-            setPassword("");
-            setRepeatPassword("");
+            return;
         }
     }
 
     if (warning.length > 0) {
+        if (warning === warningTypes.ShortPassword) warningText = warningMessages.ShortPassword;
+        if (warning === warningTypes.PasswordMissingDigit) warningText = warningMessages.PasswordMissingDigit
+        if (warning === warningTypes.PasswordMissingLowerCaseCharacter) warningText = warningMessages.PasswordMissingLowerCaseCharacter
+        if (warning === warningTypes.PasswordMissingUpperCaseCharacter) warningText = warningMessages.PasswordMissingUpperCaseCharacter;
         if (warning === warningTypes.PasswordsNotEqual) warningText = warningMessages.PasswordsNotEqual;
+        if (warning === warningTypes.ShortUsername) warningText = warningMessages.ShortUsername;
     }
 
     return (
         <Form onSubmit={handleSubmit}>
             <Header text="Register"/>
             <Label htmlFor="username" text="Username"/>
-            <InputText type="text" id="username" name="username" value={username} onChange={handleUsernameChange} isRequired={true} minLenght={6} maxLenght={32}/>
+            <InputText type="text" id="username" name="username" value={username} onChange={handleUsernameChange} isRequired={true} maxLenght={32}/>
             <Label htmlFor="email" text="Email"/>
             <InputText type="email" id="email" name="email" value={email} onChange={handleEmailChange} isRequired={true}/>
             <Label htmlFor="password" text="Password"/>
-            <InputText type="password" id="password" name="password" value={password} onChange={handlePasswordChange} isRequired={true} minLenght={8} maxLenght={64}/>
+            <InputText type="password" id="password" name="password" value={password} onChange={handlePasswordChange} isRequired={true} maxLenght={64}/>
             <Label htmlFor="repeatPassword" text="Repeat password"/>
-            <InputText type="password" id="repeatPassword" name="repeatPassword" value={repeatPassword} onChange={handleRepeatPasswordChange} isRequired={true} minLenght={8} maxLenght={64}/>
+            <InputText type="password" id="repeatPassword" name="repeatPassword" value={repeatPassword} onChange={handleRepeatPasswordChange} isRequired={true} maxLenght={64}/>
             <InputButton type="submit" value="Register"/>
             {warning ? <Warning header="Warning" text={warningText}/> : null}
         </Form>

@@ -11,5 +11,10 @@ export const websiteInformationData = {
 };
 
 export const warningMessages = {
-    PasswordsNotEqual: "The passwords you entered do not match. Please try again."
+    PasswordsNotEqual: "The passwords you entered do not match. Please try again.",
+    ShortPassword: "The password must have at least 8 characters.",
+    PasswordMissingDigit: "The password must contain at least one digit",
+    PasswordMissingLowerCaseCharacter: "Password must contain at least one lower case character",
+    PasswordMissingUpperCaseCharacter: "Password must contain at least one upper case character",
+    ShortUsername: "The username must contain at least 6 characters",
 };
