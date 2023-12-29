@@ -16,7 +16,9 @@ export default function RegisterForm() {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [warning, setWarning] = useState("");
-    let warningText = "";
+    const [registrationSuccess, setRegistrationSuccess] = useState(0);
+    const [registrationMessage, setRegistrationMessage] = useState("");
+    let informationText = "";
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -67,15 +69,53 @@ export default function RegisterForm() {
             setWarning(warningTypes.PasswordsNotEqual);
             return;
         }
+
+        const FormData =
+        {
+            username: username,
+            email: email,
+            password: password,
+            repeatPassword: repeatPassword
+        };
+
+        try
+        {
+            fetch
+            (
+                "http://localhost:3500/api/register",
+                {
+                    method: "POST",
+                    headers: { "Content-Type" : "application/json"},
+                    body: JSON.stringify({FormData})
+                }
+            )
+            .then(async (res) => {
+                if (res.ok) {
+                    const response = await res.json();
+                    const {success, message} = response;
+
+                    setRegistrationMessage(message);
+                    success === 1 ? setRegistrationSuccess(1) : setRegistrationSuccess(2);
+                }
+            })
+            .catch(() => {
+                setRegistrationSuccess(3);
+                setRegistrationMessage("Error! looks like there was a mistake.");
+            })
+        }
+        catch{
+            setRegistrationSuccess(3);
+            setRegistrationMessage("Error! looks like there was a mistake.");
+        }
     }
 
     if (warning.length > 0) {
-        if (warning === warningTypes.ShortPassword) warningText = warningMessages.ShortPassword;
-        if (warning === warningTypes.PasswordMissingDigit) warningText = warningMessages.PasswordMissingDigit
-        if (warning === warningTypes.PasswordMissingLowerCaseCharacter) warningText = warningMessages.PasswordMissingLowerCaseCharacter
-        if (warning === warningTypes.PasswordMissingUpperCaseCharacter) warningText = warningMessages.PasswordMissingUpperCaseCharacter;
-        if (warning === warningTypes.PasswordsNotEqual) warningText = warningMessages.PasswordsNotEqual;
-        if (warning === warningTypes.ShortUsername) warningText = warningMessages.ShortUsername;
+        if (warning === warningTypes.ShortPassword) informationText = warningMessages.ShortPassword;
+        if (warning === warningTypes.PasswordMissingDigit) informationText = warningMessages.PasswordMissingDigit
+        if (warning === warningTypes.PasswordMissingLowerCaseCharacter) informationText = warningMessages.PasswordMissingLowerCaseCharacter
+        if (warning === warningTypes.PasswordMissingUpperCaseCharacter) informationText = warningMessages.PasswordMissingUpperCaseCharacter;
+        if (warning === warningTypes.PasswordsNotEqual) informationText = warningMessages.PasswordsNotEqual;
+        if (warning === warningTypes.ShortUsername) informationText = warningMessages.ShortUsername;
     }
 
     return (
@@ -90,7 +130,8 @@ export default function RegisterForm() {
             <Label htmlFor="repeatPassword" text="Repeat password"/>
             <InputText type="password" id="repeatPassword" name="repeatPassword" value={repeatPassword} onChange={handleRepeatPasswordChange} isRequired={true} maxLenght={64}/>
             <InputButton type="submit" value="Register"/>
-            {warning ? <Warning header="Warning" text={warningText}/> : null}
+            {warning ? <Warning header="Warning" text={informationText}/> : null}
+            {registrationSuccess > 0 ? <Warning text={registrationMessage}/> : null}
         </Form>
     )
 }
