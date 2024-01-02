@@ -1,12 +1,12 @@
 import "../css/InformationTextComponent.css"
-import { informationType } from "../global/variables";
+import { informationTypes } from "../global/variables";
 
 export default function Warning(props: {header?:string, text:string, type:string}) {
 
     let InformationClassCompute = "information ";
-    if (props.type === informationType.success) InformationClassCompute += " information--success";
-    if (props.type === informationType.warning) InformationClassCompute += "information--warning";
-    if (props.type === informationType.error) InformationClassCompute += "information--error";
+    if (props.type === informationTypes.success) InformationClassCompute += " information--success";
+    if (props.type === informationTypes.warning) InformationClassCompute += "information--warning";
+    if (props.type === informationTypes.error) InformationClassCompute += "information--error";
 
     return (
         <div className={InformationClassCompute}>

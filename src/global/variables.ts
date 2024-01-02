@@ -7,8 +7,13 @@ export const warningTypes = {
     ShortUsername: "Short Username",
 }
 
-export const informationType = {
+export const informationTypes = {
     success : "success",
     warning : "warning",
     error : "error"
+}
+export const registrationStatusTypes = {
+    success: "Success",
+    error: "Error",
+    usernameTaken: "Username Taken"
 }

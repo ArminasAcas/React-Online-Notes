@@ -8,7 +8,9 @@ import React, { useState } from "react"
 import Warning from "./InformationTextComponent"
 import { warningTypes } from "../global/variables"
 import { warningMessages } from "../global/textData"
-import { informationType } from "../global/variables"
+import { informationTypes } from "../global/variables"
+import { registrationStatusTypes } from "../global/variables"
+import { RegistrationMessages } from "../global/textData"
 
 export default function RegisterForm() {
 
@@ -16,10 +18,11 @@ export default function RegisterForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [warning, setWarning] = useState("");
-    const [registrationSuccess, setRegistrationSuccess] = useState(0);
-    const [registrationMessage, setRegistrationMessage] = useState("");
+    const [warningStatus, setWarningStatus] = useState("");
+    const [registrationStatus, setRegistrationStatus] = useState("");
+    let informationType = "";
     let informationText = "";
+    let informationHeader = "";
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -39,35 +42,35 @@ export default function RegisterForm() {
 
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setWarning("");
+        setWarningStatus("");
 
         if (username.length < 6){
-            setWarning(warningTypes.ShortUsername);
+            setWarningStatus(warningTypes.ShortUsername);
             return;
         }
 
         if (password.length < 8){
-            setWarning(warningTypes.ShortPassword);
+            setWarningStatus(warningTypes.ShortPassword);
             return;
         }
 
         if (!/\d/.test(password)){
-            setWarning(warningTypes.PasswordMissingDigit);
+            setWarningStatus(warningTypes.PasswordMissingDigit);
             return
         }
 
         if (!/[a-z]/.test(password)){
-            setWarning(warningTypes.PasswordMissingLowerCaseCharacter);
+            setWarningStatus(warningTypes.PasswordMissingLowerCaseCharacter);
             return;
         }
 
         if (!/[A-Z]/.test(password)){
-            setWarning(warningTypes.PasswordMissingUpperCaseCharacter);
+            setWarningStatus(warningTypes.PasswordMissingUpperCaseCharacter);
             return;
         }
 
         if (password !== repeatPassword){
-            setWarning(warningTypes.PasswordsNotEqual);
+            setWarningStatus(warningTypes.PasswordsNotEqual);
             return;
         }
 
@@ -93,30 +96,49 @@ export default function RegisterForm() {
             .then(async (res) => {
                 if (res.ok) {
                     const response = await res.json();
-                    const {success, message} = response;
+                    const {status} = response;
 
-                    setRegistrationMessage(message);
-                    success === 1 ? setRegistrationSuccess(1) : setRegistrationSuccess(2);
+                    if (status === 1) setRegistrationStatus(registrationStatusTypes.success);
+                    if (status === 2) setRegistrationStatus(registrationStatusTypes.error);
+                    if (status === 3) setRegistrationStatus(registrationStatusTypes.usernameTaken);
                 }
             })
             .catch(() => {
-                setRegistrationSuccess(3);
-                setRegistrationMessage("Error! looks like there was a mistake.");
+                setRegistrationStatus(registrationStatusTypes.error);
             })
         }
         catch{
-            setRegistrationSuccess(3);
-            setRegistrationMessage("Error! looks like there was a mistake.");
+            setRegistrationStatus(registrationStatusTypes.error);
         }
     }
 
-    if (warning.length > 0) {
-        if (warning === warningTypes.ShortPassword) informationText = warningMessages.ShortPassword;
-        if (warning === warningTypes.PasswordMissingDigit) informationText = warningMessages.PasswordMissingDigit
-        if (warning === warningTypes.PasswordMissingLowerCaseCharacter) informationText = warningMessages.PasswordMissingLowerCaseCharacter
-        if (warning === warningTypes.PasswordMissingUpperCaseCharacter) informationText = warningMessages.PasswordMissingUpperCaseCharacter;
-        if (warning === warningTypes.PasswordsNotEqual) informationText = warningMessages.PasswordsNotEqual;
-        if (warning === warningTypes.ShortUsername) informationText = warningMessages.ShortUsername;
+    if (warningStatus.length > 0) {
+        informationType = informationTypes.warning;
+        informationHeader = "Warning";
+        if (warningStatus === warningTypes.ShortPassword) informationText = warningMessages.ShortPassword;
+        if (warningStatus === warningTypes.PasswordMissingDigit) informationText = warningMessages.PasswordMissingDigit
+        if (warningStatus === warningTypes.PasswordMissingLowerCaseCharacter) informationText = warningMessages.PasswordMissingLowerCaseCharacter
+        if (warningStatus === warningTypes.PasswordMissingUpperCaseCharacter) informationText = warningMessages.PasswordMissingUpperCaseCharacter;
+        if (warningStatus === warningTypes.PasswordsNotEqual) informationText = warningMessages.PasswordsNotEqual;
+        if (warningStatus === warningTypes.ShortUsername) informationText = warningMessages.ShortUsername;
+    }
+
+    if (registrationStatus.length > 0) {
+        if (registrationStatus === registrationStatusTypes.success) {
+            informationType = informationTypes.success;
+            informationHeader = RegistrationMessages.success.header;
+            informationText = RegistrationMessages.success.text;
+        }
+        if (registrationStatus === registrationStatusTypes.error) {
+            informationType = informationTypes.error;
+            informationHeader = RegistrationMessages.error.header;
+            informationText = RegistrationMessages.error.text;
+        }
+        if (registrationStatus === registrationStatusTypes.usernameTaken) {
+            informationType = informationTypes.warning;
+            informationHeader = RegistrationMessages.usernameTaken.header;
+            informationText = RegistrationMessages.usernameTaken.text;
+        }
     }
 
     return (
@@ -131,8 +153,7 @@ export default function RegisterForm() {
             <Label htmlFor="repeatPassword" text="Repeat password"/>
             <InputText type="password" id="repeatPassword" name="repeatPassword" value={repeatPassword} onChange={handleRepeatPasswordChange} isRequired={true} maxLenght={64}/>
             <InputButton type="submit" value="Register"/>
-            {warning ? <Warning header="Warning" text={informationText} type={informationType.warning}/> : null}
-            {registrationSuccess > 0 ? <Warning text={registrationMessage} type={informationType.success}/> : null}
+            {informationText.length > 0 ? <Warning header={informationHeader} text={informationText} type={informationType}/> : null}
         </Form>
     )
 }

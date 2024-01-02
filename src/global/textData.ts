@@ -18,3 +18,18 @@ export const warningMessages = {
     PasswordMissingUpperCaseCharacter: "Password must contain at least one upper case character",
     ShortUsername: "The username must contain at least 6 characters",
 };
+
+export const RegistrationMessages = {
+    success: {
+        header: "Account successfully created !",
+        text: "Login to your account by going to the login page.",
+    },
+    error: {
+        header:"Error !",
+        text:"Looks like there was an issue creating your account, please try again later."
+    },
+    usernameTaken: {
+        header:"Username taken",
+        text:"The specified username is already in use. Please choose another one."
+    }
+};
