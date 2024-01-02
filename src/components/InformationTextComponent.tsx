@@ -1,7 +1,7 @@
 import "../css/InformationTextComponent.css"
 import { informationTypes } from "../global/variables";
 
-export default function Warning(props: {header?:string, text:string, type:string}) {
+export default function InformationBox(props: {header?:string, text:string, type:string}) {
 
     let InformationClassCompute = "information ";
     if (props.type === informationTypes.success) InformationClassCompute += " information--success";
