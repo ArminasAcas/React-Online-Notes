@@ -6,3 +6,9 @@ export const warningTypes = {
     PasswordMissingUpperCaseCharacter: "Password Missing Upper Case Character",
     ShortUsername: "Short Username",
 }
+
+export const informationType = {
+    success : "success",
+    warning : "warning",
+    error : "error"
+}

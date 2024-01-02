@@ -5,9 +5,10 @@ import InputButton from "./InputButtonComponent"
 import Form from "./FormComponent"
 import Header from "./HeaderComponent"
 import React, { useState } from "react"
-import Warning from "./WarningTextComponent"
+import Warning from "./InformationTextComponent"
 import { warningTypes } from "../global/variables"
 import { warningMessages } from "../global/textData"
+import { informationType } from "../global/variables"
 
 export default function RegisterForm() {
 
@@ -130,8 +131,8 @@ export default function RegisterForm() {
             <Label htmlFor="repeatPassword" text="Repeat password"/>
             <InputText type="password" id="repeatPassword" name="repeatPassword" value={repeatPassword} onChange={handleRepeatPasswordChange} isRequired={true} maxLenght={64}/>
             <InputButton type="submit" value="Register"/>
-            {warning ? <Warning header="Warning" text={informationText}/> : null}
-            {registrationSuccess > 0 ? <Warning text={registrationMessage}/> : null}
+            {warning ? <Warning header="Warning" text={informationText} type={informationType.warning}/> : null}
+            {registrationSuccess > 0 ? <Warning text={registrationMessage} type={informationType.success}/> : null}
         </Form>
     )
 }
