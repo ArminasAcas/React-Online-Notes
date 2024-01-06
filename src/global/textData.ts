@@ -31,5 +31,9 @@ export const RegistrationMessages = {
     usernameTaken: {
         header:"Username taken",
         text:"The specified username is already in use. Please choose another one."
+    },
+    emailTaken: {
+        header:"Email taken",
+        text:"The specified email is already in use. Please choose another one."
     }
 };

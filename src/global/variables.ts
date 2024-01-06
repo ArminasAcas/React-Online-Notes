@@ -15,5 +15,6 @@ export const informationTypes = {
 export const registrationStatusTypes = {
     success: "Success",
     error: "Error",
-    usernameTaken: "Username Taken"
+    usernameTaken: "Username Taken",
+    emailTaken: "Email Taken"
 }

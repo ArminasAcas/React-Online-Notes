@@ -79,7 +79,6 @@ export default function RegisterForm() {
             username: username,
             email: email,
             password: password,
-            repeatPassword: repeatPassword
         };
 
         try
@@ -101,6 +100,7 @@ export default function RegisterForm() {
                     if (status === 1) setRegistrationStatus(registrationStatusTypes.success);
                     if (status === 2) setRegistrationStatus(registrationStatusTypes.error);
                     if (status === 3) setRegistrationStatus(registrationStatusTypes.usernameTaken);
+                    if (status === 4) setRegistrationStatus(registrationStatusTypes.emailTaken);
                 }
             })
             .catch(() => {
@@ -138,6 +138,11 @@ export default function RegisterForm() {
             informationType = informationTypes.warning;
             informationHeader = RegistrationMessages.usernameTaken.header;
             informationText = RegistrationMessages.usernameTaken.text;
+        }
+        if (registrationStatus === registrationStatusTypes.emailTaken) {
+            informationType = informationTypes.warning;
+            informationHeader = RegistrationMessages.emailTaken.header;
+            informationText = RegistrationMessages.emailTaken.text;
         }
     }
 
