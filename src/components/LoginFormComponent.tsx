@@ -5,11 +5,19 @@ import InputButton from "./InputButtonComponent"
 import Form from "./FormComponent"
 import Header from "./HeaderComponent"
 import { useState } from "react"
+import InformationBox from "./InformationTextComponent"
+import { LoginMessages } from "../global/textData"
+import { loginStatusTypes } from "../global/variables"
+import { informationTypes } from "../global/variables"
 
 export default function LoginForm() {
 
     const [username,setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loginSatus, setLoginStatus] = useState("");
+    let infoText = "";
+    let infoHeader = "";
+    let infoType = "";
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -20,7 +28,45 @@ export default function LoginForm() {
     }
 
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         
+        try {
+            const FormData = {
+                username: username,
+                password: password
+            }
+
+            fetch(
+                "http://localhost:3500/api/login", 
+                {
+                    method: "POST",
+                    headers: { "Content-Type" : "application/json"},
+                    body: JSON.stringify({FormData})
+                }
+            )
+            .then ( async (res) => {
+                if (res.status === 200) {
+                    const response = await res.json();
+                    const {token} = response;
+                    localStorage.setItem("userToken", token);
+                }
+                else if (res.status === 401) {
+                    setLoginStatus(loginStatusTypes.incorrectCredentials);
+                }
+                else {
+                    setLoginStatus(loginStatusTypes.error);
+                }
+            })
+        }
+        catch {
+            setLoginStatus(loginStatusTypes.error);
+        }
+    }
+
+    if (loginSatus === loginStatusTypes.incorrectCredentials) {
+        infoHeader = LoginMessages.incorrectCredentials.header;
+        infoText = LoginMessages.incorrectCredentials.text;
+        infoType = informationTypes.error;
     }
 
     return (
@@ -31,6 +77,7 @@ export default function LoginForm() {
             <Label htmlFor="password" text="Password" />
             <InputText type="password" id="password" name="password" value={password} onChange={handlePasswordChange} isRequired={true}/>
             <InputButton type="submit" value="Log in" />
+            {loginSatus.length > 0 ? <InformationBox header={infoHeader} text={infoText} type={infoType}></InformationBox> : null}
         </Form>
     )
 }

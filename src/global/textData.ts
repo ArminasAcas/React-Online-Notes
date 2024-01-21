@@ -37,3 +37,14 @@ export const RegistrationMessages = {
         text:"The specified email is already in use. Please choose another one."
     }
 };
+
+export const LoginMessages = {
+    incorrectCredentials: {
+        header: "Incorrect Credentials",
+        text: "The entered username or password doesnt match"
+    },
+    error: {
+        header: "Error",
+        text: "Looks like there was an issue, try again later."
+    }
+}

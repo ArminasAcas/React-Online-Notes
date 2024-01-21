@@ -18,3 +18,8 @@ export const registrationStatusTypes = {
     usernameTaken: "Username Taken",
     emailTaken: "Email Taken"
 }
+
+export const loginStatusTypes = {
+    incorrectCredentials: "Incorrect Credentials",
+    error: "Error"
+}
