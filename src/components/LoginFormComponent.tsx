@@ -9,6 +9,7 @@ import InformationBox from "./InformationTextComponent"
 import { LoginMessages } from "../global/textData"
 import { loginStatusTypes } from "../global/variables"
 import { informationTypes } from "../global/variables"
+import { Navigate } from "react-router-dom"
 
 export default function LoginForm() {
 
@@ -47,8 +48,8 @@ export default function LoginForm() {
             .then ( async (res) => {
                 if (res.status === 200) {
                     const response = await res.json();
-                    const {token} = response;
-                    localStorage.setItem("userToken", token);
+                    const {token, expiresIn} = response;
+                    localStorage.setItem("userToken", JSON.stringify({token, expiresIn}));
                 }
                 else if (res.status === 401) {
                     setLoginStatus(loginStatusTypes.incorrectCredentials);
