@@ -1,4 +1,4 @@
-import Navbar from "./NavbarComponent"
+import Navbar from "../components/NavbarComponent"
 
 export default function Dashboard() {
 

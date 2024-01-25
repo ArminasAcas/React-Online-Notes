@@ -16,6 +16,7 @@ export default function LoginForm() {
     const [username,setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginSatus, setLoginStatus] = useState("");
+    const [redirect,setRedirect] = useState(0);
     let infoText = "";
     let infoHeader = "";
     let infoType = "";
@@ -50,6 +51,7 @@ export default function LoginForm() {
                     const response = await res.json();
                     const {token, expiresIn} = response;
                     localStorage.setItem("userToken", JSON.stringify({token, expiresIn}));
+                    setRedirect(1);
                 }
                 else if (res.status === 401) {
                     setLoginStatus(loginStatusTypes.incorrectCredentials);
@@ -70,6 +72,8 @@ export default function LoginForm() {
         infoType = informationTypes.error;
     }
 
+    if (redirect)  return <Navigate to="/Dashboard" replace/>
+    
     return (
         <Form onSubmit={handleSubmit}>
             <Header text="Login"/>

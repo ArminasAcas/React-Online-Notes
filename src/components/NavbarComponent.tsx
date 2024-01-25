@@ -1,4 +1,3 @@
-import { redirect } from "react-router-dom";
 import "../css/NavbarComponent.css"
 import { verifyToken } from "../utils/auth"
 import { Navigate } from "react-router-dom";
@@ -27,6 +26,7 @@ export default function Navbar() {
             <ul className="navbar">
                 <li className="navbar__element"> <a className="navbar__link" href="" onClick={handleLogout}>Logout</a></li>
                 <li className="navbar__element"> <a className="navbar__link" href="Dashboard">Dashboard</a></li>
+                <li className="navbar__element"> <a className="navbar__link" href="Notes">Notes</a></li>
             </ul>
         </>
     )
