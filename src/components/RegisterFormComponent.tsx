@@ -1,4 +1,3 @@
-import "../css/RegisterFormComponent.css"
 import Label from "./LabelComponent"
 import InputText from "./InputTextComponent"
 import InputButton from "./InputButtonComponent"

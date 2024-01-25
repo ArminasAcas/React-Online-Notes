@@ -1,4 +1,3 @@
-import "../css/LoginFormComponent.css"
 import Label from "./LabelComponent"
 import InputText from "./InputTextComponent"
 import InputButton from "./InputButtonComponent"
