@@ -1,0 +1,31 @@
+.note-preview {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: rgb(211, 234, 255);
+}
+
+.note-preview__header {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(147, 187, 255);;
+}
+
+.note-preview__text {
+    padding: 5px;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.note-preview--hover {
+    background-color: rgb(183, 215, 247);
+}
+
+.note-preview__header--hover {
+    background-color: rgb(99, 149, 233);;
+}
