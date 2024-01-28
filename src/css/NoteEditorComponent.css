@@ -1,0 +1,33 @@
+.note-editor {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px 20px 50px;
+    text-align: center;
+}
+
+.note-editor__header {
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: x-large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border: solid 2px black;
+}
+
+.note-editor__text {
+    margin-top: 10px;
+    height: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    overflow: auto;
+    resize: none;
+    border: solid 2px black;
+}
+
+.note-editor__label {
+    margin: 0;
+    margin: 25px 0 0 0;
+}
