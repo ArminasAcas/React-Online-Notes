@@ -9,6 +9,7 @@ import { LoginMessages } from "../global/textData"
 import { loginStatusTypes } from "../global/variables"
 import { informationTypes } from "../global/variables"
 import { Navigate } from "react-router-dom"
+import { tokenUtils } from "../utils/token"
 
 export default function LoginForm() {
 
@@ -49,7 +50,7 @@ export default function LoginForm() {
                 if (res.status === 200) {
                     const response = await res.json();
                     const {token, expiresIn} = response;
-                    localStorage.setItem("userToken", JSON.stringify({token, expiresIn}));
+                    tokenUtils.setToken(token, expiresIn);
                     setRedirect(1);
                 }
                 else if (res.status === 401) {

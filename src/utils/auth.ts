@@ -1,3 +1,5 @@
+import { tokenUtils } from "./token";
+
 export const verifyToken = async (token: string) => {
     try{
         const response = await fetch (
@@ -11,7 +13,7 @@ export const verifyToken = async (token: string) => {
         });
     
         if (response.status !== 200) {
-            localStorage.removeItem("userToken");
+            tokenUtils.removeToken();
             return false;
         }
 
