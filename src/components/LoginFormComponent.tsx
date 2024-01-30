@@ -49,8 +49,8 @@ export default function LoginForm() {
             .then ( async (res) => {
                 if (res.status === 200) {
                     const response = await res.json();
-                    const {token, expiresIn} = response;
-                    tokenUtils.setToken(token, expiresIn);
+                    const {token} = response;
+                    tokenUtils.setToken(token);
                     setRedirect(1);
                 }
                 else if (res.status === 401) {

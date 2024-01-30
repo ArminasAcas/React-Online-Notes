@@ -5,10 +5,12 @@ import { useState } from "react";
 interface NotePreviewProps {
     header?: string;
     text: string;
+    noteID?: number;
 }
 
-export default function NotePreview({header="Note", text}: NotePreviewProps) {
+export default function NotePreview({header="Note", text, noteID}: NotePreviewProps) {
     
+    const id = noteID
     const [hasMouseEntered, setHasMouseEntered] = useState(false);
 
     function handleMouseEnter(){

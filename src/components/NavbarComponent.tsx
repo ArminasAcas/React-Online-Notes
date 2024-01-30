@@ -2,10 +2,25 @@ import "../css/NavbarComponent.css"
 import { verifyToken } from "../utils/auth"
 import { Navigate } from "react-router-dom";
 import { tokenUtils } from "../utils/token";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
-    const userToken = tokenUtils.getToken();
-    const isAuthenticated = userToken ? verifyToken(userToken) : false;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+          const userToken = tokenUtils.getToken();
+       
+          if (userToken) {
+            const authStatus = await verifyToken(userToken);
+            if (authStatus) setIsAuthenticated(authStatus);
+            else setIsAuthenticated(false);
+          }
+          else setIsAuthenticated(false);
+        };
+    
+        checkAuthentication();
+      }, []);
     
     const handleLogout = () => {
         tokenUtils.removeToken();

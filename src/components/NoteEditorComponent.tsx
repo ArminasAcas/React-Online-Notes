@@ -1,6 +1,6 @@
 import Button from "./ButtonComponent"
 import ButtonList from "./ButtonListComponent"
-import "../css/NoteComponent.css"
+import "../css/NoteEditorComponent.css"
 import { ChangeEvent, useState } from "react"
 
 export default function NoteEditor() {

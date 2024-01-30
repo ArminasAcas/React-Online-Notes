@@ -7,8 +7,8 @@ export const tokenUtils = {
         localStorage.removeItem("userToken");
     },
     
-    setToken: (token:any, expiresIn:any) => {
-        localStorage.setItem("userToken", JSON.stringify({token, expiresIn}));
+    setToken: (token:any) => {
+        localStorage.setItem("userToken", token);
     }
 }
 
