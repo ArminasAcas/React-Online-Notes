@@ -6,9 +6,10 @@ interface NotePreviewProps {
     header?: string;
     text: string;
     noteID?: number;
+    onClick: (noteID: number) => void;
 }
 
-export default function NotePreview({header="Note", text, noteID}: NotePreviewProps) {
+export default function NotePreview({header="Note", text, noteID, onClick}: NotePreviewProps) {
     
     const id = noteID
     const [hasMouseEntered, setHasMouseEntered] = useState(false);
@@ -21,10 +22,15 @@ export default function NotePreview({header="Note", text, noteID}: NotePreviewPr
         setHasMouseEntered(false);
     }
 
+    function handleClick() {
+        if (noteID) onClick(noteID);
+    }
+
     return (
         <div className={hasMouseEntered ? "note-preview scroll-bar note-preview--hover" : "note-preview scroll-bar"} 
         onMouseEnter={handleMouseEnter} 
         onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
         >
             <h3 className={hasMouseEntered ? "note-preview__header note-preview__header--hover" : "note-preview__header"}>
                 {header}

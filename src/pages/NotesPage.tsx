@@ -19,20 +19,43 @@ export default function Notes() {
 
     const [noteList, setNoteList] = useState<Note[]>([]);
     const [noteIsOpen, setNoteIsOpen] = useState(false);
+    const [isDeleteModeActive, setIsDeleteModeActive] = useState(false);
+    const [noteClickedID, setNoteClickedID] = useState<number | null>(null);
     const [areNotesUpdated, setAreNotesUpdated] = useState(false);
+    const token = tokenUtils.getToken();
 
-    function handleNewNoteClick() {
-
+    function handleCreateButtonClick() {
+        try {
+            fetch("http://localhost:3500/api/addNewNote",
+            {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json", 
+                    Authorization: `Bearer ${token}` 
+                },
+            })
+            .then( async (res) => {
+                if (res.ok) {
+                    setAreNotesUpdated(false);
+                }
+            })
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
-    function handleDeleteNoteClick() {
+    function handleDeleteButtonClick() {
+        if (!isDeleteModeActive) setNoteClickedID(null);
+        setIsDeleteModeActive(!isDeleteModeActive);
+    }
 
+    function handleNoteClick(notePreviewID: number) {
+        setNoteClickedID(notePreviewID);
     }
 
     function getLatestNotes() {
         try {
-            const token = tokenUtils.getToken();
-            
             fetch("http://localhost:3500/api/getLatestNotes",
             {
                 method: "POST",
@@ -42,35 +65,57 @@ export default function Notes() {
                 },
             })
             .then( async (res) => {
-                if (res.status === 200) {
+                if (res.ok) {
                     const response = await res.json()
                     const {notes} = response;
                     setNoteList(notes);
                     setAreNotesUpdated(true);
                 }
             })
-            .catch()
         }
         catch(err) {
-
+            console.log(err);
         }
     }
 
    if (!areNotesUpdated) {
      getLatestNotes();
    }
-
+   
+   if(isDeleteModeActive && noteClickedID) {
+        try {
+            console.log("Running fetch to delete")
+            fetch("http://localhost:3500/api/deleteNote",
+            {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json", 
+                    Authorization: `Bearer ${token}` 
+                },
+                body: JSON.stringify({noteID : noteClickedID})
+            })
+            .then( async (res) => {
+                if (res.ok) {
+                    setNoteClickedID(null);
+                    setAreNotesUpdated(false);
+                }
+            })
+        }
+        catch(err) {
+            console.log(err);
+        }
+   }
    
    const notes = noteList.map( (note) => {
-    return <NotePreview key={note.id} noteID={note.id} text={note.name}/>
+    return <NotePreview key={note.id} noteID={note.id} text={note.name} onClick={handleNoteClick}/>
     }); 
 
     if (!noteIsOpen) return (
         <>
             <Navbar/>
             <ButtonList>
-                <Button text="Add new Note" onClick={handleNewNoteClick}></Button>
-                <Button text="Delete Notes" onClick={handleDeleteNoteClick}></Button>
+                <Button text="Add new Note" onClick={handleCreateButtonClick}></Button>
+                <Button text="Delete Note" onClick={handleDeleteButtonClick}></Button>
             </ButtonList>
             
             <NoteList>
