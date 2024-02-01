@@ -84,7 +84,6 @@ export default function Notes() {
    
    if(isDeleteModeActive && noteClickedID) {
         try {
-            console.log("Running fetch to delete")
             fetch("http://localhost:3500/api/deleteNote",
             {
                 method: "POST",
@@ -105,6 +104,8 @@ export default function Notes() {
             console.log(err);
         }
    }
+
+   if (noteClickedID && !isDeleteModeActive && !noteIsOpen) setNoteIsOpen(true)
    
    const notes = noteList.map( (note) => {
     return <NotePreview key={note.id} noteID={note.id} text={note.name} onClick={handleNoteClick}/>
@@ -125,10 +126,10 @@ export default function Notes() {
         </>
     )
     
-    else return (
-        <>
+    if (noteIsOpen && noteClickedID) return (
+    <>
         <Navbar/>
-            <NoteEditor/>
+            <NoteEditor noteID={noteClickedID} setNoteClickedID={setNoteClickedID} setNoteIsOpen={setNoteIsOpen} setAreNotesUpdated={setAreNotesUpdated}/>
         <Footer/>
     </>
     )
