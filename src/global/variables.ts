@@ -23,3 +23,11 @@ export const loginStatusTypes = {
     incorrectCredentials: "Incorrect Credentials",
     error: "Error"
 }
+
+export const noteEditStatusTypes = {
+    noteSuccessfullySaved: "Note Successfully Saved",
+    noteSuccessfullyCleared: "Note Successfully Cleared" ,
+    noteSaveError: "Note Save Error" ,
+    noteLoadError: "Note Load Error",
+    noteClearError: "Note Clear Error"
+}

@@ -48,3 +48,26 @@ export const LoginMessages = {
         text: "Looks like there was an issue, try again later."
     }
 }
+
+export const NoteEditMessages = {
+    noteSuccessfullySaved: {
+        header: "Note successfully saved",
+        text: ""
+    },
+    noteSuccessfullyCleared: {
+        header: "Note successfully cleared",
+        text: ""
+    },
+    noteSaveError: {
+        header: "Error",
+        text: "Looks like there was an issue saving your note. Please try again later."
+    },
+    noteLoadError: {
+        header: "Error",
+        text: "Looks like there was an issue loading your note. Please try again later."
+    },
+    noteClearError: {
+        header: "Error",
+        text: "Looks like there was an issue clearing your note. Please try again later."
+    }
+}
