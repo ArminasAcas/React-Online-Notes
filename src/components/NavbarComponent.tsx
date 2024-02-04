@@ -5,7 +5,7 @@ import { tokenUtils } from "../utils/token";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -27,7 +27,9 @@ export default function Navbar() {
         return <Navigate to="/Login" replace/>
     }
 
-    if (!isAuthenticated) return (
+    if (isAuthenticated === null) return <div></div>
+
+    if (isAuthenticated === false) return (
         <ul className="navbar">
             <li className="navbar__element"> <a className="navbar__link" href="Login">Login</a> </li>
             <li className="navbar__element"> <a className="navbar__link" href="Register">Register</a> </li>

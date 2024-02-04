@@ -31,6 +31,6 @@ export default function ProtectedRoute( {children} : ProtectedRouteProps ) {
     checkAuthentication();
   }, []); 
   
-  if (isAuthenticated === null) return <div> wait....</div>
+  if (isAuthenticated === null) return <div></div>
   return isAuthenticated? children : <Navigate to="/Home" replace/>
 }

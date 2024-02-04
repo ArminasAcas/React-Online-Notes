@@ -71,3 +71,9 @@ export const NoteEditMessages = {
         text: "Looks like there was an issue clearing your note. Please try again later."
     }
 }
+
+export const SortButtonTextList = {
+    default: "Sort Notes",
+    sortAsc: "Sort Notes (Asc.)",
+    sortDesc: "Sort Notes (Desc.)"
+}
