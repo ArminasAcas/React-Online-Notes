@@ -6,5 +6,13 @@
 }
 
 .button:hover {
-    background-color: rgb(179, 198, 255);
+    background-color: rgb(181, 199, 251);
+}
+
+.button:active {
+    background-color: rgb(139, 161, 226);
+}
+
+.button--pressed {
+    background-color: rgb(139, 161, 226);
 }
