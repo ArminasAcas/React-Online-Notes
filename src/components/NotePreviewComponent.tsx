@@ -7,12 +7,15 @@ interface NotePreviewProps {
     text: string;
     noteID?: number;
     onClick: (noteID: number) => void;
+    onMouseEnterSetColorRed?: boolean;
 }
 
-export default function NotePreview({header="Note", text, noteID, onClick}: NotePreviewProps) {
+export default function NotePreview({header="Note", text, noteID, onClick, onMouseEnterSetColorRed=false}: NotePreviewProps) {
     
     const id = noteID
     const [hasMouseEntered, setHasMouseEntered] = useState(false);
+    let noteClassNames = "note-preview scroll-bar";
+    let noteHeaderClassNames = "note-preview__header";
 
     function handleMouseEnter(){
         setHasMouseEntered(true);
@@ -26,15 +29,23 @@ export default function NotePreview({header="Note", text, noteID, onClick}: Note
         if (noteID) onClick(noteID);
     }
 
+    function selectClassnames() {
+        if (hasMouseEntered && !onMouseEnterSetColorRed) {
+            noteClassNames += " note-preview--hover";
+            noteHeaderClassNames += " note-preview__header--hover";
+        }
+
+        if (hasMouseEntered && onMouseEnterSetColorRed) {
+            noteClassNames += " note-preview--hover-red";
+            noteHeaderClassNames += " note-preview__header--hover-red";
+        }
+    }
+
+    selectClassnames();
+
     return (
-        <div className={hasMouseEntered ? "note-preview scroll-bar note-preview--hover" : "note-preview scroll-bar"} 
-        onMouseEnter={handleMouseEnter} 
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
-        >
-            <h3 className={hasMouseEntered ? "note-preview__header note-preview__header--hover" : "note-preview__header"}>
-                {header}
-            </h3>
+        <div className={noteClassNames} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClick}>
+            <h3 className={noteHeaderClassNames}>{header}</h3>
             <h3 className="note-preview__text">{text}</h3>
         </div>
     )

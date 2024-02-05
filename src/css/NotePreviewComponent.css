@@ -29,3 +29,11 @@
 .note-preview__header--hover {
     background-color: rgb(99, 149, 233);;
 }
+
+.note-preview--hover-red {
+    background-color: rgb(247, 183, 183);
+}
+
+.note-preview__header--hover-red {
+    background-color: rgb(233, 99, 99);;
+}

@@ -175,7 +175,13 @@ export default function Notes() {
    sortNoteList();
    
    const notes = noteList.map( (note) => {
-    return <NotePreview key={note.id} noteID={note.id} text={note.name} onClick={handleNoteClick}/>
+    return <NotePreview 
+        key={note.id} 
+        noteID={note.id} 
+        text={note.name} 
+        onClick={handleNoteClick} 
+        onMouseEnterSetColorRed={isDeleteModeActive}
+        />
     }); 
 
     if (!noteIsOpen) return (
@@ -183,7 +189,7 @@ export default function Notes() {
             <Navbar/>
             <ButtonList>
                 <Button text="Add new Note" onClick={handleCreateNoteButtonClick}></Button>
-                <Button text="Delete Note" onClick={handleDeleteNoteButtonClick}></Button>
+                <Button text="Delete Notes" onClick={handleDeleteNoteButtonClick} onClickKeepPressed={isDeleteModeActive}></Button>
                 <Button text="Delete All Notes" onClick={handleDeleteAllNotesButtonClick}></Button>
                 <Button text={sortButtonText} onClick={handleSortNotesButtonClick}></Button>
             </ButtonList>
@@ -198,7 +204,12 @@ export default function Notes() {
     if (noteIsOpen && noteClickedID) return (
     <>
         <Navbar/>
-            <NoteEditor noteID={noteClickedID} setNoteClickedID={setNoteClickedID} setNoteIsOpen={setNoteIsOpen} setAreNotesUpdated={setAreNotesUpdated}/>
+            <NoteEditor 
+            noteID={noteClickedID} 
+            setNoteClickedID={setNoteClickedID} 
+            setNoteIsOpen={setNoteIsOpen} 
+            setAreNotesUpdated={setAreNotesUpdated}
+            />
         <Footer/>
     </>
     )
