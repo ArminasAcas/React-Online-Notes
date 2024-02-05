@@ -46,6 +46,10 @@ export const LoginMessages = {
     error: {
         header: "Error",
         text: "Looks like there was an issue, try again later."
+    },
+    serverError: {
+        header: "Server Error",
+        text: "Looks like something when wrong, pleasy try again later."
     }
 }
 

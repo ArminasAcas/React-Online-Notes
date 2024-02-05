@@ -47,7 +47,7 @@ export default function LoginForm() {
                 }
             )
             .then ( async (res) => {
-                if (res.status === 200) {
+                if (res.ok) {
                     const response = await res.json();
                     const {token} = response;
                     tokenUtils.setToken(token);
@@ -56,9 +56,15 @@ export default function LoginForm() {
                 else if (res.status === 401) {
                     setLoginStatus(loginStatusTypes.incorrectCredentials);
                 }
+                else if (res.status === 500) {
+                    setLoginStatus(loginStatusTypes.serverError);
+                }
                 else {
                     setLoginStatus(loginStatusTypes.error);
                 }
+            })
+            .catch((err) => {
+                setLoginStatus(loginStatusTypes.error);
             })
         }
         catch {
@@ -66,13 +72,25 @@ export default function LoginForm() {
         }
     }
 
-    if (loginSatus === loginStatusTypes.incorrectCredentials) {
-        infoHeader = LoginMessages.incorrectCredentials.header;
-        infoText = LoginMessages.incorrectCredentials.text;
-        infoType = informationTypes.error;
+    if (loginSatus.length > 0) {
+        if (loginSatus === loginStatusTypes.incorrectCredentials) {
+            infoHeader = LoginMessages.incorrectCredentials.header;
+            infoText = LoginMessages.incorrectCredentials.text;
+            infoType = informationTypes.error;
+        }
+        if (loginSatus === loginStatusTypes.error) {
+            infoHeader = LoginMessages.error.header;
+            infoText = LoginMessages.error.text;
+            infoType = informationTypes.error;
+        }
+        if (loginSatus === loginStatusTypes.serverError) {
+            infoHeader = LoginMessages.serverError.header;
+            infoText = LoginMessages.serverError.text;
+            infoType = informationTypes.error;
+        }
     }
-
-    if (redirect)  return <Navigate to="/Dashboard" replace/>
+    
+    if (redirect) return <Navigate to="/Dashboard" replace/>
     
     return (
         <Form onSubmit={handleSubmit}>

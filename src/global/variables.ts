@@ -21,7 +21,8 @@ export const registrationStatusTypes = {
 
 export const loginStatusTypes = {
     incorrectCredentials: "Incorrect Credentials",
-    error: "Error"
+    error: "Error",
+    serverError: "Server Error"
 }
 
 export const noteEditStatusTypes = {
