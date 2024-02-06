@@ -31,7 +31,6 @@ export default function PublicRoute( {children} : PublicRouteProps ) {
     checkAuthentication();
   }, []);
 
-  console.log("Public route isAuthenticated - " + isAuthenticated);
   if (isAuthenticated === null) return <div></div>
   return isAuthenticated ? <Navigate to="/Dashboard" replace/> : children 
 }

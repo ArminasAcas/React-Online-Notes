@@ -12,7 +12,6 @@ interface NotePreviewProps {
 
 export default function NotePreview({header="Note", text, noteID, onClick, onMouseEnterSetColorRed=false}: NotePreviewProps) {
     
-    const id = noteID
     const [hasMouseEntered, setHasMouseEntered] = useState(false);
     let noteClassNames = "note-preview scroll-bar";
     let noteHeaderClassNames = "note-preview__header";

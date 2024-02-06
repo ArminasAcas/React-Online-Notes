@@ -3,14 +3,20 @@ import Container from "./ContainerComponent";
 
 export default function WebsiteInformation(props: { headerText : string, paragraphTextArray: string[], imgURLS ?: string[]}) {
 
-    if (!props.headerText || !props.paragraphTextArray || !Array.isArray(props.paragraphTextArray)) return null;
-
-    const paragraphs = props.paragraphTextArray.map(
-        (paragraph, index) => <p key={index} className="web-information__text">{paragraph}</p>
-    );
-
+    let paragraphs;
     let images;
-    if (props.imgURLS) images = props.imgURLS.map((image, index) => <img src={image} key={index} className="web-information__image"></img>)
+
+    function mapData() {
+        paragraphs = props.paragraphTextArray.map(
+            (paragraph, index) => <p key={index} className="web-information__text">{paragraph}</p>
+        );
+    
+        if (props.imgURLS) images = props.imgURLS.map(
+            (image, index) => <img src={image} key={index} className="web-information__image"></img>
+        );
+    }
+
+    mapData();
 
     return (
         <Container>

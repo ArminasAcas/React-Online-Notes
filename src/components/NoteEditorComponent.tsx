@@ -149,6 +149,7 @@ export default function NoteEditor( {noteID,setNoteIsOpen, setNoteClickedID, set
          setTimeout( () => {
             setInformationMessageType(null);
          }, 2000)
+         
     }, [informationMessageType])
     
     return (

@@ -29,7 +29,7 @@ export default function Navbar() {
 
     if (isAuthenticated === null) return <div></div>
 
-    if (isAuthenticated === false) return (
+    if (!isAuthenticated) return (
         <ul className="navbar">
             <li className="navbar__element"> <a className="navbar__link" href="Login">Login</a> </li>
             <li className="navbar__element"> <a className="navbar__link" href="Register">Register</a> </li>
