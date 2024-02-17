@@ -30,3 +30,8 @@
     border: 2px solid rgb(255, 7, 7);
     background-color: rgb(255, 152, 152);
 }
+
+.information--general {
+    border: 2px solid rgb(81, 7, 255);
+    background-color: rgb(183, 237, 255);
+}

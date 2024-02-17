@@ -1,4 +1,4 @@
-import "../css/InformationTextComponent.css"
+import "../css/InformationBoxComponent.css"
 import { informationTypes } from "../global/variables";
 
 export default function InformationBox(props: {header?:string, text:string, type:string}) {
@@ -9,6 +9,7 @@ export default function InformationBox(props: {header?:string, text:string, type
         if (props.type === informationTypes.success) InformationClassCompute += " information--success";
         if (props.type === informationTypes.warning) InformationClassCompute += "information--warning";
         if (props.type === informationTypes.error) InformationClassCompute += "information--error";
+        if (props.type === informationTypes.general) InformationClassCompute += "information--general";
     }
 
     selectClassNames();

@@ -3,7 +3,7 @@ import ButtonList from "./ButtonListComponent"
 import "../css/NoteEditorComponent.css"
 import { ChangeEvent, useEffect, useState } from "react"
 import { tokenUtils } from "../utils/token";
-import InformationBox from "./InformationTextComponent";
+import InformationBox from "./InformationBoxComponent";
 import { informationTypes } from "../global/variables";
 import { NoteEditMessages } from "../global/textData";
 import { noteEditStatusTypes } from "../global/variables";

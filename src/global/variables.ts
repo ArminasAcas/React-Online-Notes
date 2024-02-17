@@ -10,7 +10,8 @@ export const warningTypes = {
 export const informationTypes = {
     success : "success",
     warning : "warning",
-    error : "error"
+    error : "error",
+    general: "general"
 }
 export const registrationStatusTypes = {
     success: "Success",
